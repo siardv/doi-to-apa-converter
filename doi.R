@@ -5,7 +5,7 @@ for (i in seq(.libs)) {
   }
 }
 
-doi <- function(.apa = TRUE, .cite = TRUE, .doi = NULL) {
+doi <- function(.doi = NULL, .apa = TRUE, .cite = TRUE) {
   if (is.null(.doi)) {
     stop()
   }
