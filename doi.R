@@ -57,3 +57,8 @@ doi_to_citation <- function(.doi) {
     c("(", ., ", ", x[[2]], ")") %>%
     paste0(collapse = "")
 }
+
+doi_funcs <- setNames(
+  list(clean_doi, doi_to_apa, doi_details, doi_to_citation),
+  strsplit(as.character(substitute(.)), ", ")[-1]
+)
