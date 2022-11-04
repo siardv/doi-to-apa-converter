@@ -1,13 +1,11 @@
 .libs <- c("rvest", "jsonlite", "purrr", "magrittr")
-
 for (i in seq(.libs)) {
   if (!any(installed.packages()[, 1] == .libs[i])) {
     install.packages(.libs[i], dependencies = TRUE)
   }
-  library(.libs[i], character.only = TRUE, quietly = TRUE)
 }
 
-doi <- function(.doi = NULL, .apa = TRUE, .cite = TRUE) {
+doi <- function(.apa = TRUE, .cite = TRUE, .doi = NULL) {
   if (is.null(.doi)) {
     stop()
   }
@@ -61,15 +59,11 @@ doi <- function(.doi = NULL, .apa = TRUE, .cite = TRUE) {
       c("(", ., ", ", x[[2]], ")") %>%
       paste0(collapse = "")
   }
-  
-  if (.apa & !.cite) {
-    return(doi_to_apa(.doi))
-  } else if (!.apa & .cite) {
-    return(doi_to_citation(.doi))
-  } else if (.apa & .cite) {
-    return(list(
-      doi_to_apa(.doi),
-      doi_to_citation(.doi)
-    ))
+
+  if (isTRUE(.apa)) {
+    message(doi_to_apa(.doi), appendLF = FALSE)
+  }
+  if (isTRUE(.cite)) {
+    message(doi_to_citation(.doi), appendLF = FALSE)
   }
 }
