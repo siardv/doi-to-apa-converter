@@ -1,5 +1,4 @@
-
-doi <- function(.doi = NULL, .apa = TRUE, .cite = TRUE) {
+xdoi <- function(.doi = NULL, .apa = TRUE, .cite = TRUE) {
   if (is.null(.doi)) {
     stop()
   }
